@@ -9,6 +9,7 @@
 
 @interface GSDropboxActivity : UIActivity
 
+extern NSString *dropboxActivity; 
 + (NSString*)activityTypeString;
 
 @end

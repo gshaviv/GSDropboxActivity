@@ -16,11 +16,13 @@
 @property (nonatomic, retain) GSDropboxDestinationSelectionViewController *dropboxDestinationViewController;
 @end
 
+NSString *dropboxActivity = @"DropboxActivity";
+
 @implementation GSDropboxActivity
 
 + (NSString *)activityTypeString
 {
-    return @"uk.co.goosoftware.DropboxActivity";
+    return dropboxActivity;
 }
 
 - (NSString *)activityType {
@@ -69,16 +71,17 @@
 - (void)dropboxDestinationSelectionViewController:(GSDropboxDestinationSelectionViewController *)viewController
                          didSelectDestinationPath:(NSString *)destinationPath
 {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+
     for (NSURL *fileURL in self.activityItems) {
         [[GSDropboxUploader sharedUploader] uploadFileWithURL:fileURL toPath:destinationPath];
     }
-    self.activityItems = nil;
     [self activityDidFinish:YES];
 }
 
 - (void)dropboxDestinationSelectionViewControllerDidCancel:(GSDropboxDestinationSelectionViewController *)viewController
 {
-    self.activityItems = nil;
+    [viewController dismissViewControllerAnimated:YES completion:nil];
     [self activityDidFinish:NO];
 }
 

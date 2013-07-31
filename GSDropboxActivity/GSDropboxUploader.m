@@ -107,6 +107,7 @@ NSString *const GSDropboxUploaderProgressKey = @"GSDropboxUploaderProgressKey";
                                                       userInfo:@{GSDropboxUploaderFileURLKey: self._inFlightUploadJob.fileURL}];
     self._inFlightUploadJob = nil;
     [self _serviceQueue];
+    NSLog(@"Dropbox upload did finish");
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error {
